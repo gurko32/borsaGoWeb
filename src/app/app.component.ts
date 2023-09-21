@@ -37,7 +37,10 @@ export class AppComponent implements OnInit{
     console.log('1');
     this.stocks = generateDummyStockData(this.numberOfStocksToGenerate);
     console.log(this.stocks);
-    this.initializeDatatable();
+    $("#dataTable").rows( {page: 'current'} ).delete();;
+    this.dataTable.fnAddData(this.stocks);
+    this.dataTable.draw();
+    //this.initializeDatatable();
   }
 
   loadDataTableData(): void {
