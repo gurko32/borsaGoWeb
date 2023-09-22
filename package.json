@@ -18,6 +18,8 @@
     "@angular/platform-browser": "^16.2.0",
     "@angular/platform-browser-dynamic": "^16.2.0",
     "@angular/router": "^16.2.0",
+    "angular-datatables": "^16.0.0",
+    "angular-tables": "^0.0.0",
     "datatables.net": "^1.13.6",
     "datatables.net-dt": "^1.13.6",
     "jquery": "^3.7.1",

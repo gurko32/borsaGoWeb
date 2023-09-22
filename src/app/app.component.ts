@@ -1,31 +1,39 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, AfterViewInit} from '@angular/core';
 
 import { Stock } from './Stock';
 import { generateDummyStockData } from './stock-data.service'; // Adjust the path as needed
 import { ApiService } from './api.service';
+import { Subject } from 'rxjs';
 
 
-declare var $:any;
+//declare var $:any;
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
-  dataTable: any;
+export class AppComponent implements OnInit, AfterViewInit{
 
   numberOfStocksToGenerate = 10;
   stocks: Stock[] = generateDummyStockData(this.numberOfStocksToGenerate);
 
+  dtoptions: DataTables.Settings = {};
+  dtTrigger:Subject<any>=new Subject<any>();
+
   constructor(private apiService: ApiService){}
 
   ngOnInit(): void {
-    this.initializeDatatable();
+    this.dtoptions = {
+      pagingType: 'full_numbers',
+      searching:true,
+      //  paging:false
+      lengthChange:false
+    };
   }
-  private initializeDatatable() {
-    this.dataTable = $("#dataTable");
-    this.dataTable.DataTable();
+
+  ngAfterViewInit(): void{
+    this.loadDataTableData2();
   }
 
   onSubmit() {
@@ -34,12 +42,15 @@ export class AppComponent implements OnInit{
   }
 
   loadDataTableData2(): void {
+
     console.log('1');
     this.stocks = generateDummyStockData(this.numberOfStocksToGenerate);
     console.log(this.stocks);
-    $("#dataTable").rows( {page: 'current'} ).delete();;
-    this.dataTable.fnAddData(this.stocks);
-    this.dataTable.draw();
+    this.dtTrigger.next(null);
+
+    // $("#dataTable").rows( {page: 'current'} ).delete();;
+    // this.dataTable.fnAddData(this.stocks);
+    // this.dataTable.draw();
     //this.initializeDatatable();
   }
 
@@ -47,7 +58,9 @@ export class AppComponent implements OnInit{
     this.apiService.getData().subscribe(
       (data: Stock[]) => {
         this.stocks = data;
-        this.initializeDatatable();
+        //this.initializeDatatable();
+        this.dtTrigger.next(null);
+
       },
       (error) => {
         console.error('API request error:', error);
