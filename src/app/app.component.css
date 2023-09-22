@@ -1,0 +1,71 @@
+.my-form {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .my-form .btn-success {
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+  
+  .my-table {
+    width: 100%;
+  }
+  
+  .my-table th, .my-table td {
+    text-align: center;
+  }
+  
+  .my-table th {
+    background-color: #f7f7f7;
+    font-weight: bold;
+  }
+  
+  .my-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .my-table tbody tr:hover {
+    background-color: #e3e3e3;
+  }
+  .dataTables_filter {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 5px;
+  }
+  
+  .dataTables_filter label {
+    display: flex;
+    align-items: center;
+  }
+  
+  .dataTables_filter input {
+    border: none;
+    outline: none;
+  }
+  
+  .dataTables_filter input::placeholder {
+    color: #aaa;
+  }
+  
+  .dataTables_filter .form-control::before {
+    content: "\f002"; /* Unicode for magnifier icon */
+    font-family: FontAwesome;
+    padding: 0 10px;
+    font-size: 16px;
+    color: #777;
+  }
+  
+  .my-table tbody tr:nth-child(even) {
+    background-color: #f0f8ff; /* Light blue */
+  }
+  
+  .my-table tbody tr:nth-child(odd) {
+    background-color: #ffffff; /* White */
+  }
+  
+  .my-table tbody tr:hover {
+    background-color: #e3e3e3;
+  }
